@@ -6,7 +6,9 @@ import org.springframework.boot.runApplication
 
 @EntityScan(
     basePackages = [
-        "com.api.task_manager.features.auth",
+        "com.api.task_manager.features.user",
+        "com.api.task_manager.features.calls",
+        "com.api.task_manager.features.notes"
     ]
 )
 @SpringBootApplication
