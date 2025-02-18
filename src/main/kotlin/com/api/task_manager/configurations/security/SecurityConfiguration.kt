@@ -30,6 +30,7 @@ class SecurityConfiguration(val securityFilter: SecurityFilter) {
                         "/swagger-ui.html",
                         "/error"
                     ).permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/call/all").hasRole("ADMIN")
                     .anyRequest().authenticated()
             }
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter::class.java)
