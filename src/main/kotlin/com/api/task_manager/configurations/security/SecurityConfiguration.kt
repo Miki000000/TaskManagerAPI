@@ -31,6 +31,7 @@ class SecurityConfiguration(val securityFilter: SecurityFilter) {
                         "/error"
                     ).permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/call/all").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/api/note/all").hasRole("ADMIN")
                     .anyRequest().authenticated()
             }
             .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter::class.java)

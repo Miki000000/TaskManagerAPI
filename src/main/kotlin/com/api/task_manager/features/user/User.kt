@@ -1,6 +1,7 @@
 package com.api.task_manager.features.user
 
 import com.api.task_manager.features.calls.Call
+import com.api.task_manager.features.notes.Note
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
@@ -18,6 +19,9 @@ class User(
     @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
     @JsonManagedReference
     val calls: MutableList<Call> = mutableListOf(),
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @JsonManagedReference
+    val notes: MutableList<Note> = mutableListOf(),
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     val id: UUID? = null
