@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.runApplication
 
 @EntityScan(
-    basePackages = []
+    basePackages = [
+        "com.api.task_manager.features.auth",
+    ]
 )
 @SpringBootApplication
 class TaskManagerApplication
