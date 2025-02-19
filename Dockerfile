@@ -3,10 +3,10 @@ FROM amazoncorretto:21 AS builder
 
 WORKDIR /app
 
-COPY ../gradle ./gradle
-COPY ../gradlew .
-COPY ../build.gradle.kts .
-COPY ../settings.gradle.kts .
+COPY gradle ./gradle
+COPY gradlew .
+COPY build.gradle.kts .
+COPY settings.gradle.kts .
 
 RUN ./gradlew dependencies --no-daemon
 
