@@ -11,11 +11,14 @@ data class ReadNoteResponse(
     val company: String,
     val contact: String,
     val situation: String,
+    val userId: UUID,
+    val username: String,
     val id: Long,
     val creationDate: LocalDateTime
 )
 
-private fun Note.toReadNoteResponse() = ReadNoteResponse(title, company, contact, situation, id!!, creationDate)
+private fun Note.toReadNoteResponse() =
+    ReadNoteResponse(title, company, contact, situation, user.id!!, user.username, id!!, creationDate)
 
 @Service
 class ReadNoteQueryHandler(private val noteRepository: NoteRepository) {
