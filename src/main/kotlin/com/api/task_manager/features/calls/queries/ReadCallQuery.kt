@@ -12,6 +12,7 @@ data class ReadCallQueryResponse(
     val name: String,
     val company: String,
     val userId: UUID,
+    val username: String,
     val id: Long,
     val creationDate: LocalDateTime
 )
@@ -19,7 +20,7 @@ data class ReadCallQueryResponse(
 @Service
 class ReadCallQueryHandler(private val callRepository: CallRepository) {
     private fun Call.toReadCallQueryResponse() =
-        ReadCallQueryResponse(problem, solution, name, company, user.id!!, id!!, creationDate)
+        ReadCallQueryResponse(problem, solution, name, company, user.id!!, user.username, id!!, creationDate)
 
     fun readCall(userId: UUID, id: Long): ReadCallQueryResponse =
         callRepository.findByUserId(userId).find { it?.id == id }?.toReadCallQueryResponse()

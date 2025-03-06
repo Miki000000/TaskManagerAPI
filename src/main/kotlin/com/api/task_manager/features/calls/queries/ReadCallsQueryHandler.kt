@@ -12,6 +12,7 @@ data class ReadAllUserCallsQuery(
     val name: String,
     val company: String,
     val userId: UUID,
+    val username: String,
     val id: Long,
     val creationDate: LocalDateTime
 )
@@ -19,7 +20,7 @@ data class ReadAllUserCallsQuery(
 @Service
 class ReadCallsQueryHandler(private val callRepository: CallRepository) {
     fun Call.toReadAllUserCallsQuery() =
-        ReadAllUserCallsQuery(problem, solution, name, company, user.id!!, id!!, creationDate)
+        ReadAllUserCallsQuery(problem, solution, name, company, user.id!!, user.username, id!!, creationDate)
 
     fun readCalls(userId: UUID): List<ReadAllUserCallsQuery?> =
         callRepository.findByUserId(userId).map { it?.toReadAllUserCallsQuery() }

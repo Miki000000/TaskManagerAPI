@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
+//localhost:8080/api/call
 
 @RestController
 @RequestMapping("api/call")
@@ -23,7 +24,6 @@ class CallController(
     private val readAllCallsQueryHandler: ReadAllCallsQueryHandler,
     private val deleteCallCommand: DeleteCallCommand
 ) {
-
     @Operation(summary = "Create a call in the database")
     @PostMapping("")
     fun createCallRequest(
