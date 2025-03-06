@@ -18,6 +18,7 @@ class TokenService(@Value("\${api.security.secret}") private val secret: String)
             JWT.create()
                 .withIssuer("auth-api")
                 .withSubject(user.username)
+                .withClaim("info", mapOf("role" to user.role.name))
                 .withExpiresAt(getExpirationDate())
                 .sign(algorithm)
         }.fold(
