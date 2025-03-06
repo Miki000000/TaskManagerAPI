@@ -1,6 +1,6 @@
 services:
   backend:
-    build: ./src
+    build: .
     depends_on:
       db:
         condition: service_healthy
