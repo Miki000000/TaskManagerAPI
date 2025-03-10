@@ -22,4 +22,7 @@ class UserController(val getUsersQuery: GetUsersQuery) {
 
     @GetMapping("/all")
     fun getUsers() = getUsersQuery.getUsers().handleResponse()
+
+    @GetMapping("/usernames")
+    fun getUsernames() = getUsersQuery.getUsernames().handleResponse()
 }
