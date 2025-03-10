@@ -22,14 +22,14 @@ data class RegisterRequest(val email: String, val username: String, val password
         require(email.isNotBlank() && email.matches(Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"))) { "User must have a valid email." }
         require(username.isNotBlank()) { "User must have a username." }
         require(password.isNotBlank()) { "User must have a password." }
-        require(password.toCharArray().size > 8) { "User must have a password with 8 characters or more." }
+        require(password.toCharArray().size >= 8) { "User must have a password with 8 characters or more." }
     }
 }
 
 data class ChangePasswordRequest(val password: String) {
     init {
         require(password.isNotBlank()) { "Must inform a password" }
-        require(password.toCharArray().size > 8) { "User must have a password with 8 characters or more." }
+        require(password.toCharArray().size >= 8) { "User must have a password with 8 characters or more." }
     }
 }
 
