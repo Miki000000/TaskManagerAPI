@@ -8,7 +8,8 @@ import org.springframework.boot.runApplication
     basePackages = [
         "com.api.task_manager.features.user",
         "com.api.task_manager.features.calls",
-        "com.api.task_manager.features.notes"
+        "com.api.task_manager.features.notes",
+        "com.api.task_manager.features.tasks"
     ]
 )
 @SpringBootApplication

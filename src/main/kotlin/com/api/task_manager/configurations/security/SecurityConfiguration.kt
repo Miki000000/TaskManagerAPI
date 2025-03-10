@@ -33,8 +33,9 @@ class SecurityConfiguration(val securityFilter: SecurityFilter) {
                         "/swagger-ui.html",
                         "/error"
                     ).permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/call/all").hasRole("ADMIN")
-                    .requestMatchers(HttpMethod.POST, "/api/note/all").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/call/all").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/note/all").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/task/all").hasRole("ADMIN")
                     .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")
                     .anyRequest().authenticated()
             }
