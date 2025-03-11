@@ -11,7 +11,8 @@ data class ReadTasksQueryResponse(
     val attributedUser: String,
     val createdBy: String,
     val id: Long,
-    val creationDate: LocalDateTime
+    val creationDate: LocalDateTime,
+    val completedDate: LocalDateTime?
 )
 
 
@@ -23,5 +24,6 @@ fun Task.toReadTasksQueryResponse() = ReadTasksQueryResponse(
     attributedUser.username,
     createdBy.username,
     id!!,
-    creationDate
+    creationDate,
+    completedDate
 )

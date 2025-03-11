@@ -20,5 +20,6 @@ data class Task(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val creationDate: LocalDateTime = LocalDateTime.now()
+    val creationDate: LocalDateTime = LocalDateTime.now(),
+    val completedDate: LocalDateTime? = null
 )
