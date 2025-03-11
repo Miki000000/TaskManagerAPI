@@ -10,9 +10,26 @@ class ReadTasksQueryHandler(private val taskRepository: TaskRepository, private 
     fun readTasks(user: User) =
         taskRepository.findByCreatedBy_Id(user.id!!).map { task -> task?.toReadTasksQueryResponse() }
 
-    fun readTasksFromAttributed(user: User, username: String): List<ReadTasksQueryResponse?> {
-        val attributedUser = userRepository.findByUsername(username) ?: throw Exception("User does not exists.")
-        return taskRepository.findByCreatedBy_IdAndAttributedUser_Id(user.id!!, attributedUser.id!!)
+    fun readTasksFromAttributed(user: User): List<ReadTasksQueryResponse?> =
+        taskRepository.findByAttributedUser_Id(user.id!!)
             .map { task -> task?.toReadTasksQueryResponse() }
-    }
+
+    fun readTasksFromAttributed(username: String): List<ReadTasksQueryResponse?> =
+        userRepository.findByUsername(username).let { user ->
+            taskRepository.findByAttributedUser_Id(user?.id!!).map { task ->
+                task?.toReadTasksQueryResponse()
+            }
+        }
+
+    fun readTasksRelated(username: String): List<ReadTasksQueryResponse?> =
+        userRepository.findByUsername(username).let { user ->
+            taskRepository.findByCreatedBy_IdOrAttributedUser_Id(user?.id!!, user.id!!).map { task ->
+                task?.toReadTasksQueryResponse()
+            }
+        }
+
+    fun readTasksRelated(user: User): List<ReadTasksQueryResponse?> =
+        taskRepository.findByCreatedBy_IdOrAttributedUser_Id(user.id!!, user.id!!).map { task ->
+            task?.toReadTasksQueryResponse()
+        }
 }

@@ -43,15 +43,28 @@ class TaskController(
     ) =
         updateTaskCommandHandler.updatePartialTask(id, updatePartialTaskCommand).handleResponse()
 
-    @GetMapping
-    fun getUserTasks(@AuthenticationPrincipal user: User) = readTasksQueryHandler.readTasks(user).handleResponse()
+    @GetMapping("/created")
+    fun getCreatedUserTasks(@AuthenticationPrincipal user: User) =
+        readTasksQueryHandler.readTasks(user).handleResponse()
+
+    @GetMapping("/attributed")
+    fun getAttributedUserTasks(@AuthenticationPrincipal user: User) =
+        readTasksQueryHandler.readTasksFromAttributed(user).handleResponse()
 
     @GetMapping("/user/{username}")
-    fun getAttributedUserTasks(@AuthenticationPrincipal user: User, @PathVariable username: String) =
-        readTasksQueryHandler.readTasksFromAttributed(user, username).handleResponse()
+    fun getAttributedUserTasks(@PathVariable username: String) =
+        readTasksQueryHandler.readTasksFromAttributed(username).handleResponse()
 
-    @GetMapping("/{id}")
+    @GetMapping("/username/{username}")
+    fun readSpecificUserTasks(@PathVariable username: String) =
+        readTasksQueryHandler.readTasksRelated(username).handleResponse()
+
+    @GetMapping("/userid/{id}")
     fun getTask(@PathVariable id: Long) = readTaskQueryHandler.getTask(id).handleResponse()
+
+    @GetMapping
+    fun getRelatedTasks(@AuthenticationPrincipal user: User) =
+        readTasksQueryHandler.readTasksRelated(user).handleResponse()
 
     @GetMapping("/all")
     fun getAllTasks() = readAllTasksQueryHandler.getAllTasks().handleResponse()
